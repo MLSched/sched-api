@@ -6,11 +6,12 @@ package apis
  * since:  0.1
  */
 
-type Listener struct {
-	Target *Target
-	Type   string
+type Target struct {
+	Client any
 }
 
-type ListenerActions interface {
-	DoListening()
+func NewTarget(client any) *Target {
+	kubeTarget := new(Target)
+	kubeTarget.Client = client
+	return kubeTarget
 }

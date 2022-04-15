@@ -2,11 +2,22 @@
 package kube
 
 import (
+	"fmt"
 	"github.com/kubesys/client-go/pkg/kubesys"
-	apis "sched-api/apis"
+	"sched-api/apis"
 )
 
-type KubeTarget struct {
-	apis.Target
-	client *kubesys.KubernetesClient
+/**
+ * author: wuheng@iscas.ac.cn
+ * since:  0.1
+ */
+
+type KubeListener struct {
+	apis.Listener
+}
+
+func (listener *KubeListener) DoListening() {
+	client := listener.Target.Client.(*kubesys.KubernetesClient)
+	res, _ := client.ListResources(listener.Type, "")
+	fmt.Print(string(res))
 }
